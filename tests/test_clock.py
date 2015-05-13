@@ -2,26 +2,26 @@
 
 import unittest
 from hamcrest import *
-from pyDoubles.framework import *
+from doublex import *
 
 import datetime
 
-from common import clock as clock_module
+from infcommon import clock as clock_module
 
 
 class ClockTest(unittest.TestCase):
 
     def test_today(self):
-        date_obj = empty_spy()
+        date_obj = Spy()
         clock = clock_module.Clock(date_obj=date_obj)
         clock.today()
-        assert_that_method(date_obj.today).was_called()
+        assert_that(date_obj.today, called())
 
     def test_now(self):
-        datetime_obj = empty_spy()
+        datetime_obj = Spy()
         clock = clock_module.Clock(datetime_obj=datetime_obj)
         clock.now()
-        assert_that_method(datetime_obj.now).was_called()
+        assert_that(datetime_obj.now, called())
 
     def test_utctimestampnow(self):
         now = clock_module.Clock().now()

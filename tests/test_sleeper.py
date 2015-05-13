@@ -6,7 +6,7 @@ from doublex import *
 
 import datetime
 
-from common import clock as clock_module
+from infcommon import clock as clock_module
 
 IRRELEVANT_TIME = datetime.datetime.now()
 IRRELEVANT_SECONDS = 2

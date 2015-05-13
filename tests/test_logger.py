@@ -4,7 +4,7 @@ import unittest
 from doublex import *
 from hamcrest import *
 
-from common import logger
+from infcommon import logger
 
 IRRELEVANT_NAME = 'irrelevant_name'
 IRRELEVANT_MESSAGE = 'irrelevant_message'
