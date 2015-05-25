@@ -41,10 +41,12 @@ def add_handler(handler_name, handler_conf):
 def activate_debug():
     BASE_CONF['handlers']['console']['level'] = 'DEBUG'
     logging.config.dictConfig(BASE_CONF)
+    logging.info("Activating debug")
 
 def deactivate_debug():
     BASE_CONF['handlers']['console']['level'] = 'INFO'
     logging.config.dictConfig(BASE_CONF)
+    logging.info("Deactivating debug")
 
 signal.signal(signal.SIGUSR1, lambda signal, frame: activate_debug())
 signal.signal(signal.SIGUSR2, lambda signal, frame: deactivate_debug())
