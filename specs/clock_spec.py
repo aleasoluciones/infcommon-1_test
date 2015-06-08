@@ -21,6 +21,12 @@ with description('Clock specs'):
         clock.now()
         expect(datetime_obj.now).to(have_been_called)
 
+    with it('calls collaborator for utcnow'):
+        datetime_obj = Spy()
+        clock = clock_module.Clock(datetime_obj=datetime_obj)
+        clock.utcnow()
+        expect(datetime_obj.utcnow).to(have_been_called)
+
     with context('working with timestamps'):
         with it('checks aproximated time stamps'):
             now = clock_module.Clock().now()

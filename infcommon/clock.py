@@ -16,6 +16,9 @@ class Clock(object):
     def now(self):
         return self.datetime_obj.now()
 
+    def utcnow(self):
+        return self.datetime_obj.utcnow()
+
     def utctimestampnow(self):
         return self.timestamp(self.now())
 
