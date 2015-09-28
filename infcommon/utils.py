@@ -6,7 +6,7 @@ import logging
 
 MIN_SLEEP_TIME = 0.2
 MAX_RECONNECTION_TIME = 10
-SUCESSFUL_RECONNECTION_TIME = 1
+SUCESSFUL_RECONNECTION_TIME = 30
 
 
 def do_stuff_with_exponential_backoff(exceptions, stuff_func, *args, **kwargs):
@@ -22,7 +22,10 @@ def do_stuff_with_exponential_backoff(exceptions, stuff_func, *args, **kwargs):
             t1 = datetime.datetime.now()
             return stuff_func(*args, **kwargs)
         except exceptions:
-            logging.error("Error performing stuff", exc_info=True)
+            if try_num % 5 == 0:
+                logging.error("Error performing stuff", exc_info=True)
+            else:
+                logging.info("Error performing stuff")
             if datetime.datetime.now() - t1 > datetime.timedelta(seconds=SUCESSFUL_RECONNECTION_TIME):
                 try_num = 1
             else:
