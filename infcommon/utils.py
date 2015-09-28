@@ -10,24 +10,34 @@ SUCESSFUL_RECONNECTION_TIME = 30
 
 
 def do_stuff_with_exponential_backoff(exceptions, stuff_func, *args, **kwargs):
-
-    def _sleep_for_reconnect(try_num):
-        reconnect_sleep_time = min(MAX_RECONNECTION_TIME, (try_num**2)*MIN_SLEEP_TIME)
-        logging.info("Waiting for reconnect try {} sleeping {}s".format(try_num, reconnect_sleep_time))
-        time.sleep(reconnect_sleep_time)
-
     try_num = 1
     while True:
         try:
             t1 = datetime.datetime.now()
             return stuff_func(*args, **kwargs)
         except exceptions:
-            if try_num % 5 == 0:
-                logging.error("Error performing stuff", exc_info=True)
-            else:
-                logging.info("Error performing stuff")
-            if datetime.datetime.now() - t1 > datetime.timedelta(seconds=SUCESSFUL_RECONNECTION_TIME):
-                try_num = 1
-            else:
-                try_num += 1
+            _log_to_error_or_info(try_num)
+            try_num = _calculate_try_number(t1, try_num)
             _sleep_for_reconnect(try_num)
+
+
+def _sleep_for_reconnect(try_num):
+    reconnect_sleep_time = min(MAX_RECONNECTION_TIME, (try_num**2)*MIN_SLEEP_TIME)
+    logging.info("Waiting for reconnect try {} sleeping {}s".format(try_num, reconnect_sleep_time))
+    time.sleep(reconnect_sleep_time)
+    
+    
+def _log_to_error_or_info(try_num):
+    if try_num % 5 == 0:
+        logging.error("Error performing stuff", exc_info=True)
+    else:
+        logging.info("Error performing stuff")
+    
+
+def _calculate_try_number(t1, try_num):
+    if datetime.datetime.now() - t1 > datetime.timedelta(seconds=SUCESSFUL_RECONNECTION_TIME):
+        try_num = 1
+    else:
+        try_num += 1
+    return try_num
+
