@@ -29,9 +29,9 @@ def _sleep_for_reconnect(try_num, exception):
 
 def _log_to_error_or_info(try_num, exception):
     if try_num % 5 == 0:
-        logging.error("Error with exponential backoff: " + repr(exception), exc_info=True)
+        logging.critical("Error with exponential backoff: " + repr(exception), exc_info=True)
     else:
-        logging.info("Error with exponential backoff: " + repr(exception))
+        logging.critical("Error with exponential backoff: " + repr(exception))
 
 
 def _calculate_try_number(t1, try_num):
