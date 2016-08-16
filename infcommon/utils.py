@@ -16,7 +16,7 @@ def do_stuff_with_exponential_backoff(exceptions, stuff_func, *args, **kwargs):
             t1 = datetime.datetime.now()
             return stuff_func(*args, **kwargs)
         except exceptions as exc:
-            _log_to_error_or_info(try_num, exc)
+            _log_to_critical_or_error(try_num, exc)
             try_num = _calculate_try_number(t1, try_num)
             _sleep_for_reconnect(try_num, exc)
 
@@ -27,11 +27,11 @@ def _sleep_for_reconnect(try_num, exception):
     time.sleep(reconnect_sleep_time)
 
 
-def _log_to_error_or_info(try_num, exception):
+def _log_to_critical_or_error(try_num, exception):
     if try_num % 5 == 0:
         logging.critical("Error with exponential backoff: " + repr(exception), exc_info=True)
     else:
-        logging.critical("Error with exponential backoff: " + repr(exception))
+        logging.error("Error with exponential backoff: " + repr(exception))
 
 
 def _calculate_try_number(t1, try_num):
