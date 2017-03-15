@@ -1,5 +1,5 @@
 #!/bin/bash
 #set -e
 
-mamba
+TEST_MODE=1 mamba
 
