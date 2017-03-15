@@ -6,7 +6,7 @@
 2. Run `setup_venv.sh`
 
 ## How to run the tests
-Run `mamba`
+Run `dev/all-tests.sh`
 
 ## Logger documentation
 * **VERY IMPORTANT**: If you want, you can set SENTRY_DNS environment variable to use Sentry as logger handler.
