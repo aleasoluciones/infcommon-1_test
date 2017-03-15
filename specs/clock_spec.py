@@ -41,5 +41,5 @@ with description('Clock specs'):
                 now = datetime.datetime.now()
                 ts = clock_module.Clock.timestamp(now)
                 now_from_ts = clock_module.Clock.fromtimestamp(ts)
-                expect(clock_module.Clock.aprox(now, now_from_ts)).to(be_false)
+                expect(clock_module.Clock.aprox(now, now_from_ts)).to(be_true)
 
