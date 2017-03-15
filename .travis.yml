@@ -8,7 +8,7 @@ install:
 - python setup.py develop
 - pip install -r requirements.txt  -r requirements-dev.txt
 script:
-- ./dev/run_specs.sh
+- ./dev/all-tests.sh
 notifications:
   hipchat:
     rooms:
