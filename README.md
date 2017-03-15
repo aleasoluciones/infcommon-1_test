@@ -1,5 +1,7 @@
 # infcommon documentation
 
+[![Build status](https://secure.travis-ci.org/aleasoluciones/infcommon.svg?branch=master)](https://secure.travis-ci.org/aleasoluciones/infcommon)
+
 ## How to set up your local development environment
 
 1. Run `source dev/env_develop`
