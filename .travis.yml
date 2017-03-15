@@ -1,0 +1,21 @@
+sudo: required
+
+language: python
+
+python:
+- '2.7'
+
+before_install:
+- sudo apt-get -y update
+
+install:
+- python setup.py develop
+- pip install -r requirements.txt  -r requirements-dev.txt
+
+script:
+- ./dev/run_specs.sh
+
+notifications:
+  hipchat:
+    rooms:
+      secure: bQwxxnwb7BBSNRFtkEU7AZy5XevNAHlIcNqbhWjVqyu0RUQGodpmyLpPN2w8CcABo320YV436BjKUfLVX03xCjdOgnZ7R3BczderwkxbRThS/9sTMW8oAcxIA6PREky59vCoSVcDdXWmHGyWMD19mZEcir4sbr+kR03fl88MzooSADq0efZKFmeZL8YU/oaT3nXkoxEeytM5D6XHUqr4A1S1VTIA0xI/c9Dza4bRTQl+qQ20kcj2lNB2D8ByINxgky+NUhJrlm2ks4YO+N2Uqy4/nLHMvzS10pKpWv3GMN2PzMcW3nAKgE6Q033fSUQdDn7sa4E07xCIBHQyfDsd5/ToXSv4FSuDRUgywBTH4Cos3ES3RcPz1JFDaFt440xuniibKbCR6cn1IETxoIbbkORI7QbfR3yXNRi/M7KKoz0owUyaapOF/bVOXgbA4XpLpDA9GPbuqp7dS3iQeGUYB/MK4gShMQBoCWu741G0TZ8m+PlUObZspP/Z+0uGJpm6/Pd/PaD7NvtPWeIqJ1TZ/dLJaOy+pANvfEXDp6FNEwp8SV23LSPcHv0djYMPkbstfu5/qZ8Gfvy3FtShk7pb4r/0I/+9phXUzLJGkQRYpXdubqcTfMFcXQbDo/5QMYhzV5EuHh8p9+qrVMrTAZWf/ZeFFVcXZTwgP/0cltRkYCk=
