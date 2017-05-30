@@ -5,7 +5,7 @@
 ## How to set up your local development environment
 
 1. Run `source dev/env_develop`
-2. Run `setup_venv.sh`
+2. Run `dev/setup_venv.sh`
 
 ## How to run the tests
 Run `dev/all-tests.sh`
