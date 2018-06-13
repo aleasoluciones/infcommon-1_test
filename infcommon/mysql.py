@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from urlparse import urlparse
+from six.moves.urllib.parse import urlparse
 import warnings
 
 import MySQLdb
