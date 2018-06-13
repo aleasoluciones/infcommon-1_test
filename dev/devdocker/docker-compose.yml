@@ -1,0 +1,36 @@
+# MySQL (Customer Index)
+inffelix_local_bote_mysql:
+  image: mysql:5.5.45
+  ports:
+   - "3313:3306"
+  environment:
+   - MYSQL_ROOT_PASSWORD=infcommon_pwd
+   - MYSQL_DATABASE=felix
+   - MYSQL_USER=felix
+   - MYSQL_PASSWORD=infcommon_pwd
+  volumes:
+   - ./local_mysql_configuration:/docker-entrypoint-initdb.d:ro
+   - /etc/localtime:/etc/localtime:ro
+   - /felix_docker_data/inffelix/local_mysql:/var/lib/mysql
+
+# Redis
+# inffelix_bote_redis:
+#   image: redis:2.8
+#   ports:
+#    - "6385:6379"
+#   volumes:
+#    - /etc/localtime:/etc/localtime:ro
+#    - /felix_docker_data/inffelix/redis:/data
+
+# # Rabbitmq
+# inffelix_conejo:
+#   image: rabbitmq:3.5.4-management
+#   hostname: felix_dev
+#   environment:
+#    - RABBITMQ_DEFAULT_USER=felix
+#    - RABBITMQ_DEFAULT_PASS=felix
+#   ports:
+#    - "15678:15672"
+#    - "5678:5672"
+#   volumes:
+#    - /etc/localtime:/etc/localtime:ro
