@@ -2,7 +2,7 @@ from mamba import description, context, it
 from expects import expect, be, have_len, be_above, equal
 
 import os
-from infcommon import mysql
+from infcommon.mysql import mysql
 
 
 TEST_TABLE = 'integration_test_table'
