@@ -3,7 +3,7 @@
 import os
 
 from infcommon.factory import Factory
-from infcommon import mysql
+from infcommon.mysql import mysql
 
 
 def mysql_client(db_uri=None):
