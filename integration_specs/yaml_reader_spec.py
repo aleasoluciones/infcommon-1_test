@@ -18,8 +18,9 @@ NON_EXISTING_KEY = 'non_existing_key'
 
 with description('YamlReader') as self:
     def _generate_file_and_return_name(self):
-        with tempfile.NamedTemporaryFile(delete=False) as keyvalue_file:
+        with tempfile.NamedTemporaryFile(mode='w', delete=False) as keyvalue_file:
             keyvalue_file.write(yaml.dump({KEY: VALUE}))
+
             return keyvalue_file.name
 
     with before.all:
@@ -27,7 +28,7 @@ with description('YamlReader') as self:
         self.yaml_reader = YamlReader(self.yaml_file)
 
     with after.all:
-        os.unlink(self.global_file)
+        os.unlink(self.yaml_file)
 
     with context('given a yaml file'):
         with context('when obtaining an info container'):

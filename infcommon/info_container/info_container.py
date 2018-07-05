@@ -12,7 +12,7 @@ class InfoContainer(object):
 
         if isinstance(items, dict):
             self.__items.append({})
-            for key, value in items.iteritems():
+            for key, value in items.items():
                 self.__items[0][key] = self._convert_to_info_container_if_needed(value)
         if isinstance(items, (list, tuple)):
             for value in items:
