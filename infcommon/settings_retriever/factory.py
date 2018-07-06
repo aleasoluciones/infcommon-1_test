@@ -1,6 +1,6 @@
 import os
 
-from infccomon.factory import Factory
+from infcommon.factory import Factory
 from infcommon.settings_retriever.settings_retriever import SettingsRetriever
 from infcommon.yaml_reader.yaml_reader import YamlReader
 
