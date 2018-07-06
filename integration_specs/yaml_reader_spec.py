@@ -20,47 +20,64 @@ with description('YamlReader') as self:
     def _generate_file_and_return_name(self):
         with tempfile.NamedTemporaryFile(mode='w', delete=False) as keyvalue_file:
             keyvalue_file.write(yaml.dump({KEY: VALUE}))
-
             return keyvalue_file.name
 
-    with before.all:
-        self.yaml_file = self._generate_file_and_return_name()
-        self.yaml_reader = YamlReader(self.yaml_file)
+    def _generate_invalid_file_and_return_name(self):
+        with tempfile.NamedTemporaryFile(mode='w', delete=False) as keyvalue_file:
+            keyvalue_file.write('')
+            return keyvalue_file.name
 
-    with after.all:
-        os.unlink(self.yaml_file)
+    with context('given an invalid yaml file'):
+        with it('raises Exception'):
+            invalid_yaml_file = self._generate_invalid_file_and_return_name()
+            invalid_yaml_reader = YamlReader(invalid_yaml_file)
 
-    with context('given a yaml file'):
-        with context('when obtaining an info container'):
-            with it('returns an info container'):
-                result = self.yaml_reader.get_info_container()
+            def _accesing_attribute_from_invalidad_yaml_file():
+                invalid_yaml_reader[KEY]
 
-                expect(result).to(be_an(InfoContainer))
+            expect(_accesing_attribute_from_invalidad_yaml_file).to(raise_error(Exception, 'Not a valid Yaml file'))
 
-            with it('contains keyvalues from yaml file'):
-                result = self.yaml_reader.get_info_container()
+            os.unlink(invalid_yaml_file)
 
-                expect(result).to(equal(InfoContainer({KEY:VALUE}, return_none=True)))
+    with context('given a valid yaml file'):
 
+        with before.all:
+            self.yaml_file = self._generate_file_and_return_name()
+            self.yaml_reader = YamlReader(self.yaml_file)
 
-    with context('given a yaml_reader object with properties loaded in it'):
-        with context('when accesing an attribute'):
-            with context('that exists'):
-                with it('returns its value'):
-                    expect(self.yaml_reader[KEY]).to(equal(VALUE))
+        with after.all:
+            os.unlink(self.yaml_file)
 
-            with context('that does NOT exist'):
-                with it('raises a KeyError exception'):
-                    def accesing_a_non_existing_attribute():
-                        self.yaml_reader[NON_EXISTING_KEY]
+        with context('given a yaml file'):
+            with context('when obtaining an info container'):
+                with it('returns an info container'):
+                    result = self.yaml_reader.get_info_container()
 
-                    expect(accesing_a_non_existing_attribute).to(raise_error(KeyError))
+                    expect(result).to(be_an(InfoContainer))
 
-        with context('when getting a value from a key'):
-            with context('that exists'):
-                with it('returns its value'):
-                    expect(self.yaml_reader.get(KEY)).to(equal(VALUE))
+                with it('contains keyvalues from yaml file'):
+                    result = self.yaml_reader.get_info_container()
 
-            with context('that does NOT exist'):
-                with it('returns None'):
-                    expect(self.yaml_reader.get(NON_EXISTING_KEY)).to(be(None))
+                    expect(result).to(equal(InfoContainer({KEY: VALUE}, return_none=True)))
+
+        with context('given a yaml_reader object with properties loaded in it'):
+            with context('when accesing an attribute'):
+                with context('that exists'):
+                    with it('returns its value'):
+                        expect(self.yaml_reader[KEY]).to(equal(VALUE))
+
+                with context('that does NOT exist'):
+                    with it('raises a KeyError exception'):
+                        def accesing_a_non_existing_attribute():
+                            self.yaml_reader[NON_EXISTING_KEY]
+
+                        expect(accesing_a_non_existing_attribute).to(raise_error(KeyError))
+
+            with context('when getting a value from a key'):
+                with context('that exists'):
+                    with it('returns its value'):
+                        expect(self.yaml_reader.get(KEY)).to(equal(VALUE))
+
+                with context('that does NOT exist'):
+                    with it('returns None'):
+                        expect(self.yaml_reader.get(NON_EXISTING_KEY)).to(be(None))
