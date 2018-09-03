@@ -19,5 +19,6 @@ MAMBA_RETCODE=$?
 echo
 echo "Stoping docker-compose..."
 docker-compose -f dev/devdocker/docker-compose.yml stop
+docker-compose -f dev/devdocker/docker-compose.yml rm -f
 
 exit $MAMBA_RETCODE
