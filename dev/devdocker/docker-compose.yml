@@ -11,5 +11,4 @@ inffelix_local_bote_mysql:
   volumes:
    - ./local_mysql_configuration:/docker-entrypoint-initdb.d:ro
    - /etc/localtime:/etc/localtime:ro
-   - /felix_docker_data/inffelix/local_mysql:/var/lib/mysql
 
