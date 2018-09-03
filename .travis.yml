@@ -9,7 +9,3 @@ install:
 - pip install -r requirements.txt  -r requirements-dev.txt
 script:
 - ./dev/all-tests.sh
-notifications:
-  hipchat:
-    rooms:
-      secure: qEeCPFOfrs5mZ/DsP61O8/JJRcuK1ydpYuPQZfNubHujwHu3H8ihho+wfZ/VTOQWiB7oAXI5dteUDobzvCv57rlT7aibDnZSJOhkG0HD7foEORHPov57TzYHL+zJEzGTThbB/PQL8zBU/NgguP4hxXGwwnF4UMNwT4g0em90AjRpc+11pma707BJhFfxREcfMJS/gtjgs2slvVEALTccqTWgvX22ipJHl6Gkdl81/AHWnLKr2PFB7177djCgN3yODzX6eDVIqVWypdylLRvUwBlsXIOfwI6p4c/GnVS27jImyedGxp/QsepbRL7avYEgiDXUkny9uAclPbGiEoBsSoJ0XB2gCOYv9m49XmsDhMZHx5VbRCFTULYI5nmgt78zcyK9+1CVXdm3pIhErMHftWTUnoEzVAxtjtcFzgWbgCUfNMMtaZh++knCXcFxwk8bpxwhoTWRJKB+tqHJ06lB2DyaAzVSDvjrLCEiVwmZR3dTlK9FPrHJtSZ1407g5xu9iOzfzA8XT3WYpvxUkzm6YqOvSktvsKo8S1nH78Y6Qe3A2lNN3uNsv7l0VazFH4F1wHiJDS2wJy7AxKZGROEwI/8OeZ8EhnrN65g20H6SraLL7IiNmPKaEEd+oYo/a106Xk5zO0QRY8L0k6jVdaFTrryK3Nz5PVWMD0+1XvnY428=
