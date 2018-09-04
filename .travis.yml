@@ -4,8 +4,7 @@ services:
 - docker
 
 env:
-  - LOCAL_DB_URI=mysql://infcommon:infcommon_pwd@127.0.0.1:3313/felix
-  - TEST_MODE=1
+  - TEST_MODE=1 LOCAL_DB_URI=mysql://infcommon:infcommon_pwd@127.0.0.1:3313/felix
 
 language: python
 
