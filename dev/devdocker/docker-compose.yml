@@ -1,5 +1,5 @@
 # MySQL (Customer Index)
-inffelix_local_bote_mysql:
+infcommon_local_bote_mysql:
   image: mysql:5.5.45
   ports:
    - "3313:3306"
