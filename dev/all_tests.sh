@@ -1,3 +1,4 @@
 #!/bin/bash
 
-TEST_MODE=1 mamba
+dev/unit_tests.sh
+dev/integration_tests.sh
