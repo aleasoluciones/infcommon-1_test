@@ -5,7 +5,7 @@ import yaml
 import tempfile
 
 from mamba import description, context, it, before, after
-from expects import expect, equal, be, be_an, raise_error
+from expects import expect, equal, be, be_an, raise_error, be_true, be_false
 
 from infcommon.yaml_reader.yaml_reader import YamlReader
 from infcommon.info_container.info_container import InfoContainer
@@ -14,12 +14,18 @@ from infcommon.info_container.info_container import InfoContainer
 KEY = 'key'
 VALUE = 'value'
 NON_EXISTING_KEY = 'non_existing_key'
+A_TRUE_BOOLEAN_PARAMETER = 'a_true_boolean_parameter'
+A_FALSE_BOOLEAN_PARAMETER = 'a_false_boolean_parameter'
+A_TRUE_BOOLEAN_PARAMETER_VALUE = True
+A_FALSE_BOOLEAN_PARAMETER_VALUE = False
 
 
 with description('YamlReader') as self:
     def _generate_file_and_return_name(self):
         with tempfile.NamedTemporaryFile(mode='w', delete=False) as keyvalue_file:
-            keyvalue_file.write(yaml.dump({KEY: VALUE}))
+            keyvalue_file.write(yaml.dump({KEY: VALUE,
+                                           A_TRUE_BOOLEAN_PARAMETER: A_TRUE_BOOLEAN_PARAMETER_VALUE,
+                                           A_FALSE_BOOLEAN_PARAMETER: A_FALSE_BOOLEAN_PARAMETER_VALUE,}))
             return keyvalue_file.name
 
     def _generate_invalid_file_and_return_name(self):
@@ -58,7 +64,9 @@ with description('YamlReader') as self:
                 with it('contains keyvalues from yaml file'):
                     result = self.yaml_reader.get_info_container()
 
-                    expect(result).to(equal(InfoContainer({KEY: VALUE}, return_none=True)))
+                    expect(result).to(equal(InfoContainer({KEY: VALUE,
+                                                           A_TRUE_BOOLEAN_PARAMETER: A_TRUE_BOOLEAN_PARAMETER_VALUE,
+                                                           A_FALSE_BOOLEAN_PARAMETER: A_FALSE_BOOLEAN_PARAMETER_VALUE,}, return_none=True)))
 
         with context('given a yaml_reader object with properties loaded in it'):
             with context('when accesing an attribute'):
@@ -77,6 +85,20 @@ with description('YamlReader') as self:
                 with context('that exists'):
                     with it('returns its value'):
                         expect(self.yaml_reader.get(KEY)).to(equal(VALUE))
+
+                    with context('when parameter value is boolean'):
+                        with context('when parameter value is True'):
+                            with it('returns the value correctly'):
+                                result = self.yaml_reader.get(A_TRUE_BOOLEAN_PARAMETER)
+
+                                expect(result).to(be_true)
+
+                        with context('when parameter value is False'):
+                            with it('returns the value correctly'):
+                                result = self.yaml_reader.get(A_FALSE_BOOLEAN_PARAMETER)
+
+                                expect(result).to(be_false)
+
 
                 with context('that does NOT exist'):
                     with it('returns None'):
