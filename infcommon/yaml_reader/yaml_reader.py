@@ -16,6 +16,11 @@ class YamlReader(object):
     def get_info_container(self):
         return InfoContainer(self._load_file(), return_none=True)
 
+    def get_key_by(self, value):
+        for key, value_ in self._load_file().iteritems():
+            if not isinstance(value_, bool) and value in value_:
+                return key
+
     def __getitem__(self, key):
         return self._load_file()[key]
 

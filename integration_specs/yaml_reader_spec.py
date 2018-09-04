@@ -103,3 +103,10 @@ with description('YamlReader') as self:
                 with context('that does NOT exist'):
                     with it('returns None'):
                         expect(self.yaml_reader.get(NON_EXISTING_KEY)).to(be(None))
+
+            with context('when getting a key from a value'):
+                with context('that exists'):
+                    with it('returns the key for the first matching value'):
+                       result = self.yaml_reader.get_key_by(value=VALUE)
+
+                       expect(result).to(equal(KEY))
