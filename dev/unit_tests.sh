@@ -1,5 +1,5 @@
 #!/bin/bash
 
-TEST_MODE=1 mamba specs
+mamba -f progress specs
 UNITTESTS_RETCODE=$?
 exit $UNITTESTS_RETCODE

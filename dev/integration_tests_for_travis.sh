@@ -1,7 +1,5 @@
 #!/bin/bash
 
-find . -name *pyc* -delete
-
 echo
 echo "Running Integration tests"
 echo "----------------------------------------------------------------------"
