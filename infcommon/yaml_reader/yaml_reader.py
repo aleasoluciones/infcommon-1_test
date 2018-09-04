@@ -13,9 +13,6 @@ class YamlReader(object):
     def get(self, key):
         return self._load_file().get(key)
 
-    def find_by_name(self, key):
-        return self.get(key)
-
     def get_info_container(self):
         return InfoContainer(self._load_file(), return_none=True)
 
