@@ -6,8 +6,8 @@ from retrying import retry
 
 class PostgresClient(object):
 
-    def __init__(self):
-        self._db_uri = 'postgresql://{user}:{password}@{host}:{port}/{db_name}'.format(user, password, host, port, db_name,)
+    def __init__(self, user, password, host, port, db_name):
+        self._db_uri = 'postgresql://{user}:{password}@{host}:{port}/{db_name}'.format(user, password, host, port, db_name)
         self._connection = None
 
     def execute(self, query, args=None):
