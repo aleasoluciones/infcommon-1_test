@@ -1,11 +1,11 @@
-# MySQL (Customer Index)
-infcommon_local_bote_mysql:
+# MySQL
+infcommon_local_db_mysql:
   image: mysql:5.5.45
   ports:
    - "3313:3306"
   environment:
    - MYSQL_ROOT_PASSWORD=root_pwd
-   - MYSQL_DATABASE=felix
+   - MYSQL_DATABASE=mysql
    - MYSQL_USER=infcommon
    - MYSQL_PASSWORD=infcommon_pwd
   volumes:

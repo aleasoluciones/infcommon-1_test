@@ -6,7 +6,7 @@ services:
 env:
     global:
         - TEST_MODE=1
-        - LOCAL_DB_URI=mysql://infcommon:infcommon_pwd@127.0.0.1:3313/felix
+        - LOCAL_DB_URI=mysql://infcommon:infcommon_pwd@127.0.0.1:3313/mysql
 
 language: python
 
@@ -15,7 +15,7 @@ python:
 
 before_install:
   - sudo apt-get -y update || true
-  - docker run -d --name infcommon_local_bote_mysql -v /etc/localtime:/etc/localtime:ro -v $(pwd)/dev/devdocker/local_mysql_configuration:/docker-entrypoint-initdb.d:ro -e MYSQL_ROOT_PASSWORD=root_pwd -e MYSQL_DATABASE=felix -e MYSQL_USER=infcommon -e MYSQL_PASSWORD=infcommon_pwd -p 3313:3306 mysql:5.5.45
+  - docker run -d --name infcommon_local_bote_mysql -v /etc/localtime:/etc/localtime:ro -v $(pwd)/dev/devdocker/local_mysql_configuration:/docker-entrypoint-initdb.d:ro -e MYSQL_ROOT_PASSWORD=root_pwd -e MYSQL_DATABASE=mysql -e MYSQL_USER=infcommon -e MYSQL_PASSWORD=infcommon_pwd -p 3313:3306 mysql:5.5.45
 
 install:
   - python setup.py develop
