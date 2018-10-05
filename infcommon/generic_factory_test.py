@@ -54,7 +54,7 @@ def find_and_call_functions_from():
     print "{} examples ran in {:.4f} seconds{}".format(TOTALS_TESTS_PASSED, elapsed_time.total_seconds(), WHITE_COLOR)
 
 
-if __name__ == "__main__":
+def run():
     try:
         find_and_call_functions_from()
         sys.exit(0)
