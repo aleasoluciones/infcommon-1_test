@@ -49,9 +49,9 @@ def find_and_call_functions_from():
                     sys.stdout.write(WHITE_COLOR)
 
     elapsed_time = datetime.utcnow() - initial_time
-    print
-    print GREEN_COLOR
-    print "{} examples ran in {:.4f} seconds{}".format(TOTALS_TESTS_PASSED, elapsed_time.total_seconds(), WHITE_COLOR)
+    print()
+    print(GREEN_COLOR)
+    print("{} examples ran in {:.4f} seconds{}".format(TOTALS_TESTS_PASSED, elapsed_time.total_seconds(), WHITE_COLOR))
 
 
 def run():
@@ -59,11 +59,11 @@ def run():
         find_and_call_functions_from()
         sys.exit(0)
     except Exception as exc:
-        print
-        print RED_COLOR
-        print "{} -> {}".format(LAST_CALL, exc)
-        print
+        print()
+        print(RED_COLOR)
+        print("{} -> {}".format(LAST_CALL, exc))
+        print()
         traceback.print_exc()
-        print WHITE_COLOR
-        print
+        print(WHITE_COLOR)
+        print()
         sys.exit(1)
