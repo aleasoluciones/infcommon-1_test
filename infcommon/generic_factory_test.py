@@ -33,7 +33,10 @@ def find_and_call_functions_from():
     initial_time = datetime.utcnow()
 
     for factory_file in factories:
-        file_to_import = re.sub('\./.+?/', '', factory_file).replace('/', '.').replace('.py', '')
+        if (sys.version_info > (3, 0)):
+            file_to_import = re.sub('\./', '', factory_file).replace('/', '.').replace('.py', '')
+        else:
+            file_to_import = re.sub('\./.+?/', '', factory_file).replace('/', '.').replace('.py', '')
 
         #https://stackoverflow.com/questions/4821104/python-dynamic-instantiation-from-string-name-of-a-class-in-dynamically-imported
         a_factory = importlib.import_module(file_to_import)
