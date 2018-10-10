@@ -33,13 +33,7 @@ def find_and_call_functions_from():
     initial_time = datetime.utcnow()
 
     for factory_file in factories:
-        if (sys.version_info > (3, 0)):
-            file_to_import = re.sub('\./', '', factory_file).replace('/', '.').replace('.py', '')
-        else:
-            file_to_import = re.sub('\./.+?/', '', factory_file).replace('/', '.').replace('.py', '')
-
-        #https://stackoverflow.com/questions/4821104/python-dynamic-instantiation-from-string-name-of-a-class-in-dynamically-imported
-        a_factory = importlib.import_module(file_to_import)
+        a_factory = _import_module(factory_file)
         for element_name in dir(a_factory):
             element = getattr(a_factory, element_name)
             if callable(element):
@@ -55,6 +49,16 @@ def find_and_call_functions_from():
     print()
     print(GREEN_COLOR)
     print("{} examples ran in {:.4f} seconds{}".format(TOTALS_TESTS_PASSED, elapsed_time.total_seconds(), WHITE_COLOR))
+
+
+def _import_module(module_name):
+    try:
+        file_to_import = re.sub('\./.+?/', '', module_name).replace('/', '.').replace('.py', '')
+        return importlib.import_module(file_to_import)
+    except Exception:
+        file_to_import = re.sub('\./', '', module_name).replace('/', '.').replace('.py', '')
+        return importlib.import_module(file_to_import)
+    #https://stackoverflow.com/questions/4821104/python-dynamic-instantiation-from-string-name-of-a-class-in-dynamically-imported
 
 
 def run():
