@@ -2,7 +2,7 @@
 
 import os
 
-from infcommon import Factory
+from infcommon.factory import Factory
 from infcommon.postgres.postgres import PostgresClient
 
 def postgres_client_from_connection_parameters(user, password, host, port, db_name):
