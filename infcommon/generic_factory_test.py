@@ -66,11 +66,11 @@ def run():
         find_and_call_functions_from()
         sys.exit(0)
     except Exception as exc:
-        print()
+        print('')
         print(RED_COLOR)
         print("{} -> {}".format(LAST_CALL, exc))
         print()
         traceback.print_exc()
         print(WHITE_COLOR)
-        print()
+        print('')
         sys.exit(1)
