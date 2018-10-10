@@ -21,21 +21,6 @@ class AttributesComparison(object):
         return self.__class__.__name__.split('.')[-1]
 
 
-class Factory(object):
-    _instances = {}
-
-    @classmethod
-    def instance(cls, id, create_instance):
-        if id not in cls._instances:
-            cls._instances[id] = create_instance()
-
-        return cls._instances[id]
-
-
 def extract_package(path):
     return os.path.split(os.path.dirname(path))[-1]
-
-def local_net_name():
-    net_name_from_hostname = socket.gethostname().split('-')[0]
-    return os.environ.get('LOCAL_NETWORK', net_name_from_hostname)
 
