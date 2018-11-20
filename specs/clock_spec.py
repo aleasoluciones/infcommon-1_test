@@ -1,3 +1,7 @@
+
+
+
+
 # -*- coding: utf-8 -*-
 
 from doublex import *
@@ -8,7 +12,7 @@ import datetime
 
 from infcommon import clock as clock_module
 
-with description('Clock specs'):
+with description('Clock specs') as self:
     with it('calls collaborator for today'):
         date_obj = Spy()
         clock = clock_module.Clock(date_obj=date_obj)
@@ -43,3 +47,48 @@ with description('Clock specs'):
                 now_from_ts = clock_module.Clock.fromtimestamp(ts)
                 expect(clock_module.Clock.aprox(now, now_from_ts)).to(be_true)
 
+    with context('working with time ranges'):
+        with before.each:
+            self.start_time = datetime.time(hour=1)
+            self.end_time = datetime.time(hour=2)
+            self.datetime_obj = Stub()
+
+        with context('when current time is in range'):
+            with it('returns true'):
+                now = datetime.datetime(year=1981, month=1, day=1, hour=1, minute=30)
+                when(self.datetime_obj).now().returns(now)
+                clock = clock_module.Clock(datetime_obj=self.datetime_obj)
+
+                now_in_range = clock.is_current_time_in_range(start=self.start_time, end=self.end_time)
+
+                expect(now_in_range).to(be_true)
+
+        with context('when current time is NOT in range'):
+            with it('returns false'):
+                now = datetime.datetime(year=1981, month=1, day=1, hour=3)
+                when(self.datetime_obj).now().returns(now)
+                clock = clock_module.Clock(datetime_obj=self.datetime_obj)
+
+                now_in_range = clock.is_current_time_in_range(start=self.start_time, end=self.end_time)
+
+                expect(now_in_range).to(be_false)
+
+        with context('when current time matches start time'):
+            with it('returns true'):
+                now = datetime.datetime(year=1981, month=1, day=1, hour=1)
+                when(self.datetime_obj).now().returns(now)
+                clock = clock_module.Clock(datetime_obj=self.datetime_obj)
+
+                now_in_range = clock.is_current_time_in_range(start=self.start_time, end=self.end_time)
+
+                expect(now_in_range).to(be_true)
+
+        with context('when current time matches end time'):
+            with it('returns false'):
+                now = datetime.datetime(year=1981, month=1, day=2, hour=2)
+                when(self.datetime_obj).now().returns(now)
+                clock = clock_module.Clock(datetime_obj=self.datetime_obj)
+
+                now_in_range = clock.is_current_time_in_range(start=self.start_time, end=self.end_time)
+
+                expect(now_in_range).to(be_false)

@@ -22,6 +22,10 @@ class Clock(object):
     def utctimestampnow(self):
         return self.timestamp(self.now())
 
+    def is_current_time_in_range(self, start, end):
+        now = self.now().time()
+        return now >= start and now < end
+
     @staticmethod
     def timestamp(t):
         # time.mktime requires LOCAL time and returns UTC
