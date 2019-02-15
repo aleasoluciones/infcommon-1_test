@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import os
 import glob
 import yaml
@@ -7,7 +5,7 @@ import yaml
 from infcommon.yaml_reader.exceptions import DuplicatedKeyError
 
 
-class DirectoryYamlLoader(object):
+class DirectoryYamlLoader:
     def __init__(self, path):
         self._path = path
 
@@ -16,12 +14,10 @@ class DirectoryYamlLoader(object):
         for filename in self._sync_files():
             file_data = self._load_data_from_file(filename)
             if self._keys_are_already_used(result, file_data):
-                raise DuplicatedKeyError
+                exception_message = 'file:{} keys:{}'.format(filename, file_data.keys())
+                raise DuplicatedKeyError(exception_message)
             result.update(file_data)
         return result
-
-    def _keys_are_already_used(self, all_dict, current_dict):
-        return len(set(all_dict.keys()) & set(current_dict.keys())) > 0
 
     def _sync_files(self):
         filenames = [filename for filename in glob.glob(self._path + '/*[.ya?ml]')]
@@ -34,3 +30,6 @@ class DirectoryYamlLoader(object):
                 return yaml.safe_load(stream)
             except yaml.YAMLError:
                 return {}
+
+    def _keys_are_already_used(self, all_dict, current_dict):
+        return len(set(all_dict.keys()) & set(current_dict.keys())) > 0
