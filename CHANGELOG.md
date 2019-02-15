@@ -1,3 +1,7 @@
+2019-02-15
+==========
+* Add DirectoryYamlLoader feature
+
 2019-01-09
 ==========
 * Internal. Update PyYALM
