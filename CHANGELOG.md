@@ -1,3 +1,7 @@
+2019-07-16
+============
+* Internal. Add serializer module
+
 2019-06-11
 ==========
 * Internal. Do not initialize Sentry if SENTRE_DSN environment variable is '' or None
