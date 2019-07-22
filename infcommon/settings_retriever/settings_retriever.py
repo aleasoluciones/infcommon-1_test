@@ -6,7 +6,7 @@ class SettingsRetrieverKeyNotFoundError(Exception):
 
 
 class SettingsRetriever(object):
-    TRUTHY_VALUES = [True, 1, 'True', '1', 'Y']
+    TRUTHY_VALUES = [True, 1, 'True', 'true', '1', 'Y', 'on', 'ON', 'On']
 
     def __init__(self, envs, settings_file):
         self._envs = envs
