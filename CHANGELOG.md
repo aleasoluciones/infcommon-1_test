@@ -1,3 +1,7 @@
+2019-08-14
+==========
+* Feature. Always return variable value if present in environment variables
+
 2019-07-16
 ============
 * Internal. Add serializer module
