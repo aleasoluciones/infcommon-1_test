@@ -110,7 +110,10 @@ with description('JsonPickleSerializer'):
         self.serializer = JsonPickleSerializer()
 
     with _context('when serializing/coding to jsonpickle'):
-        pass
+        with it('PENDING...'):
+            pass
 
     with _context('when deserializing/decoding from jsonpickle'):
-        pass
+        with it('PENDING...'):
+            pass
+
