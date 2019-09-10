@@ -42,13 +42,14 @@ class JsonOrPickleSerializer(object):
                              pickle_serializer]
 
     def loads(self, data):
+        raised_exception = None
         for serializer in self._serializers:
             try:
                 return serializer.loads(data)
             except Exception as exc:
-                pass
+                raised_exception = exc
 
-        raise DeserializeError(exc, data)
+        raise DeserializeError(raised_exception, data)
 
     def dumps(self, obj):
         raise NotImplementedError('This serializer should not be used to serialize, only deserialize')
