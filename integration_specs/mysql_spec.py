@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from mamba import description, context, it
 from expects import expect, be, have_len, be_above, equal
 
