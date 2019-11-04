@@ -52,7 +52,6 @@ def find_and_call_functions_from():
                             aux = {}
                             for x in required_arguments:
                                 aux[x] = 'irrelevant_argument_value'
-                                print('TODOS  {} {}'.format(number_of_arguments, all_arguments_and_local_variables_names))
                                 element(**aux)
                         else:
                             element()
