@@ -1,3 +1,7 @@
+2019-12-30
+==========
+* Internal. Set version for six library
+
 2019-11-20
 ==========
 * Internal. Generic factory test: Manage when the function has defaults and/or required arguments
