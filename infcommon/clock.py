@@ -26,7 +26,7 @@ class Clock(object):
         now = self.now().time()
         return now >= start and now < end
 
-    def timestamp_from_now_to_days_ago(self, days):
+    def timestamp_from_days_ago(self, days):
         return Clock.timestamp(self.now() - datetime.timedelta(days=days))
 
     @staticmethod

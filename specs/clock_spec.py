@@ -112,7 +112,7 @@ with description('Clock specs') as self:
 
             days_ago = 30
 
-            result = sut.timestamp_from_now_to_days_ago(days=days_ago)
+            result = sut.timestamp_from_days_ago(days=days_ago)
 
             expected_timestamp = clock_module.Clock.timestamp(now_from_datetime - datetime.timedelta(days=days_ago))
             expect(result).to(equal(expected_timestamp))
