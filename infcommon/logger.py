@@ -1,29 +1,21 @@
 # -*- coding: utf-8 -*-
 import os
 import logging
-import traceback
+
 from infcommon import logging_utils
+
 
 TEST_MODE_NOT_ENABLED = os.environ.get('TEST_MODE') is None
 
 
 class Logger(object):
-
     def critical(self, message, *args, **kwargs):
         exc_info = kwargs.pop('exc_info', True)
-        self._log(logging.critical,
-                  self._generate_message_with_traceback(message),
-                  exc_info=exc_info,
-                  *args,
-                  **kwargs)
+        self._log(logging.critical, message, exc_info=exc_info, *args, **kwargs)
 
     def error(self, message, *args, **kwargs):
         exc_info = kwargs.pop('exc_info', True)
-        self._log(logging.error,
-                  self._generate_message_with_traceback(message),
-                  exc_info=exc_info,
-                  *args,
-                  **kwargs)
+        self._log(logging.critical, message, exc_info=exc_info, *args, **kwargs)
 
     def warning(self, message, *args, **kwargs):
         self._log(logging.warning, message, *args, **kwargs)
@@ -61,6 +53,7 @@ def configure_sentry_if_exists_env_variable():
                         'dsn': sentry_dsn_env}
         logging_utils.add_handler('sentry', sentry_conf)
 
+
 configure_sentry_if_exists_env_variable()
 
 
@@ -87,4 +80,3 @@ def critical(message, *args, **kwargs):
 def _log(level, message, args, kwargs):
    if TEST_MODE_NOT_ENABLED:
         getattr(infrastructure_logger, level)(message, *args, **kwargs)
-
