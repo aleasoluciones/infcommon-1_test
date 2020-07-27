@@ -29,9 +29,6 @@ class Logger(object):
     def set_level(self, level):
         logging.getLogger().setLevel(level)
 
-    def _generate_message_with_traceback(self, message):
-        return 'message: {message}, traceback: {traceback}'.format(message=message, traceback=traceback.format_stack())
-
     def _log(self, function_to_call, message, *args, **kwargs):
         if TEST_MODE_NOT_ENABLED:
             function_to_call(message, *args, **kwargs)
