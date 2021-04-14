@@ -45,6 +45,9 @@ def set_level(level):
     infrastructure_logger.set_level(level)
 
 
+def enable_sentry_logging():
+    configure_sentry_if_exists_env_variable()
+
 def configure_sentry_if_exists_env_variable():
     sentry_dsn = os.environ.get('SENTRY_DSN')
     if not sentry_dsn:
