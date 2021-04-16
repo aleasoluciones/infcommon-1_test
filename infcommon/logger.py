@@ -55,7 +55,7 @@ def configure_sentry_if_exists_env_variable():
 
     integrations = []
 
-    sentry_logging = LoggingIntegration(level=logging.INFO, event_level=logging.ERROR)
+    sentry_logging = LoggingIntegration(level=logging.INFO, event_level=logging.CRITICAL)
     integrations.append(sentry_logging)
 
     try:
