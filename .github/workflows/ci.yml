@@ -47,6 +47,6 @@ jobs:
         run: ./dev/factory_tests.sh
 
       - name: integration tests
-        run:  ./dev/integration_tests_for_travis.sh
+        run:  ./dev/integration_tests.sh
 
 
