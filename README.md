@@ -2,7 +2,7 @@
 
 [![Build status](https://api.travis-ci.com/aleasoluciones/infcommon.svg?branch=master)](https://travis-ci.com/aleasoluciones/infcommon)
 
-## How to set up your local development environment
+## How to set up your local development env ironment
 
 1. Run `source dev/env_develop`
 2. Run `dev/setup_venv.sh`
