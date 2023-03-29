@@ -64,3 +64,6 @@ target/
 
 #vscode
 .vscode
+
+#pyenv
+.python-version

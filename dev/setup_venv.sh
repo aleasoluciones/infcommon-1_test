@@ -1,3 +1,6 @@
 #!/bin/bash
 
-curl -s https://raw.githubusercontent.com/aleasoluciones/pydevlib/master/scripts/setup_venv.sh | bash
+
+pip install -r requirements.txt
+pip install -r requirements-dev.txt
+python setup.py develop
