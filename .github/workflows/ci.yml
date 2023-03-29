@@ -15,6 +15,7 @@ jobs:
     env:
       TEST_MODE: 1
       CONF_FILE: /tmp/
+      DOCKER_COMPOSE_ETC: './dev/devdocker/'
 
     steps:
       - name: Checkout code
