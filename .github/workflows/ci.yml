@@ -2,55 +2,47 @@ name: CI
 
 on:
   push:
-    branches: [master]
+    branches: [ master ]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
-    services:
-      postgres:
-        image: postgres:13
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: myapp_test
-        ports:
-          - 5432:5432
-
-    env:
-      TEST_MODE: 1
-      DOCKER_COMPOSE_ETC: './dev/devdocker/'
-      CONF_FILE: /tmp/
+    runs-on: ubuntu-20.04
 
     strategy:
       matrix:
-        python-version: ['2.7']
+        python-version: [ '2.7' ]
+
+    env:
+      TEST_MODE: 1
+      CONF_FILE: /tmp/
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3.3.0
+      - name: Checkout code
+        uses: actions/checkout@v3.3.0
 
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4.5.0
-      with:
-        python-version: ${{ matrix.python-version }}
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4.5.0
+        with:
+          python-version: ${{ matrix.python-version }}
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip wheel setuptools
-        python -m pip install -r requirements-versioned.txt
-        python -m pip install -r requirements-dev.txt
-        python -m pip install -e .
 
-    - name: Unit tests
-      run: |
-        unit_tests
+      - name: Install setup
+        run: |
+          sudo apt-get -y update || true
+          python setup.py develop
 
-    - name: Integration tests
-      run: |
-        integration_tests
+      - name: Install requeriments
+        run: |
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
 
-    - name: Factory tests
-      run: |
-        factory_tests
+      - name: Unit tests
+        run: ./dev/unit_tests.sh
+
+      - name: Factory tests
+        run: ./dev/factory_tests.sh
+
+      - name: integration tests
+        run:  ./dev/integration_tests_for_travis.sh
+
+
